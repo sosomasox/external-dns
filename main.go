@@ -68,6 +68,7 @@ import (
 	"sigs.k8s.io/external-dns/provider/ultradns"
 	"sigs.k8s.io/external-dns/provider/vinyldns"
 	"sigs.k8s.io/external-dns/provider/vultr"
+	"sigs.k8s.io/external-dns/provider/sakuracloud"
 	"sigs.k8s.io/external-dns/registry"
 	"sigs.k8s.io/external-dns/source"
 )
@@ -333,6 +334,8 @@ func main() {
 		p, err = ibmcloud.NewIBMCloudProvider(cfg.IBMCloudConfigFile, domainFilter, zoneIDFilter, endpointsSource, cfg.IBMCloudProxied, cfg.DryRun)
 	case "safedns":
 		p, err = safedns.NewSafeDNSProvider(domainFilter, cfg.DryRun)
+	case "sakuracloud":
+		p, err = sakuracloud.NewSakuraCloudProvider(domainFilter, cfg.DryRun)
 	default:
 		log.Fatalf("unknown dns provider: %s", cfg.Provider)
 	}
